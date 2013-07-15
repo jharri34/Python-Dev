@@ -1,25 +1,24 @@
 class BSTnode(object):
-    """
-Representation of a node in a binary search tree.
-Has a left child, right child, and key value.
-"""
+
     def __init__(self, t):
         """Create a new leaf with key t."""
         self.key = t
         self.disconnect()
     def disconnect(self):
+        """sets all of the node references to None"""
         self.left = None
         self.right = None
         self.parent = None
-class BST(object):
 
+class BST(object):
+    """init root to None only called once"""
     def __init__(self):
         self.root = None
 
     def insert(self, t):
         """Insert key t into this BST, modifying it in-place."""
-        new = BSTnode(t)
-        if self.root is None:
+        new = BSTnode(t) #defines a new node in the binary tree
+        if self.root is None:   #sets the root node
             self.root = new
         else:
             node = self.root
@@ -29,7 +28,7 @@ class BST(object):
                     if node.left is None:
                         node.left = new
                         new.parent = node
-                        break
+                        break 
                     node = node.left
                 else:
                     # Go right
@@ -39,11 +38,48 @@ class BST(object):
                         break
                     node = node.right
         return new
-    def inorder():
+
+     def find(self, t):
+        """Return the node for key t if it is in this tree, or None otherwise."""
+        if t == self.key:
+            return self
+        elif t < self.key:
+            if self.left is None:
+                return None
+            else:
+                return self.left.find(t)
+        else:
+            if self.right is None:
+                return None
+            else:
+                return self.right.find(t)
+
+    def delete(self):
+        """"Delete this node from the tree."""
+        if self.left is None or self.right is None:
+            if self is self.parent.left:
+                self.parent.left = self.left or self.right
+                if self.parent.left is not None:
+                    self.parent.left.parent = self.parent
+            else:
+                self.parent.right = self.left or self.right
+                if self.parent.right is not None:
+                    self.parent.right.parent = self.parent 
+            current = self.parent
+            while current.key is not None:
+                current.update_stats()
+                current = current.parent
+            return self
+        else:
+            s = self.successor()
+            self.key, s.key = s.key, self.key
+            return s.delete()   
+
+    def inorder(self):
         pass
-    def preorder():
+    def preorder(self):
         pass
-    def postorder():
+    def postorder(self):
         pass
     def find(self, t):
         """Return the node for key t if is in the tree, or None otherwise."""
