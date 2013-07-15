@@ -1,24 +1,13 @@
-from hashtable import *
-from linkedList import *
+from binaryTree import *
 import random
 
 def testClient():
-	ll=LinkedList()
-	ht=hashtable()
-	head = tail =ll
-	keys = [x for x in range(256)]
-	values = [int(1/random.random()) for _ in range(256)]
+	bt = binaryTree()
+	val=[x for x in range(1,10,1)]
+	root = bt.insert( val.pop(0))
+	for i in val:
+		print root.insert(i)
 
-	for i in keys:
-		ht.insert(keys[i],values[i])
+	root.preorder()
 
-	for i in range(50):
-		key=random.choice(keys)
-		ht.get(key)
-		# print "real value is:"
-		print "key: "+str(key)+" value: "+str(values[keys.index(key)])
-	# for i in range(0,50,10):
-	# 		tail = tail.append(keys[i],values[i])
-	# node = head
-	# print tail
 testClient()
