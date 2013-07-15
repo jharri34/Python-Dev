@@ -76,10 +76,20 @@ class BST(object):
             return s.delete()   
 
     def inorder(self):
-        pass
+        self.left.inorder()
+        #visit
+        self.right.inorder()
+
     def preorder(self):
-        pass
+        #visit
+        self.left.inorder()
+        self.right.inorder()
+
     def postorder(self):
+        self.left.inorder()
+        self.right.inorder()
+        #visit
+
         pass
     def find(self, t):
         """Return the node for key t if is in the tree, or None otherwise."""
